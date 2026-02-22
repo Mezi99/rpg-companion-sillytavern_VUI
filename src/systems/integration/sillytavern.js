@@ -486,6 +486,10 @@ export function onMessageSwiped(messageIndex) {
     renderQuests();
     renderMusicPlayer($musicPlayerContainer[0]);
 
+    // Update widget strips with the newly loaded swipe data
+    updateFabWidgets();
+    updateStripWidgets();
+
     // Update chat thought overlays
     updateChatThoughts();
 }
