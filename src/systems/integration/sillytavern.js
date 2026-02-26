@@ -114,7 +114,14 @@ export function commitTrackerData() {
                 // console.log('[RPG Companion] Committing tracker data from assistant message at index', i, 'swipe', swipeId);
                 committedTrackerData.userStats = swipeData.userStats || null;
                 committedTrackerData.infoBox = swipeData.infoBox || null;
-                committedTrackerData.characterThoughts = swipeData.characterThoughts || null;
+                const rawCharacterThoughts = swipeData.characterThoughts;
+                if (rawCharacterThoughts == null) {
+                    committedTrackerData.characterThoughts = null;
+                } else if (typeof rawCharacterThoughts === 'object') {
+                    committedTrackerData.characterThoughts = JSON.stringify(rawCharacterThoughts);
+                } else {
+                    committedTrackerData.characterThoughts = String(rawCharacterThoughts);
+                }
             } else {
                 // No saved swipe data — treat as empty (e.g. first message, no prior generation)
                 committedTrackerData.userStats = null;
