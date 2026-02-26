@@ -303,8 +303,9 @@ export async function onMessageReceived(data) {
 
             // When auto-update is disabled, no tracker API call will run for this message. 
             // Inherit the prior assistant message's tracker data into this swipe slot so that 
-            // commitTrackerDataFromPriorMessage can find a valid state next turn instead of nulling everything
-            if (!extensionSettings.autoUpdate && isAwaitingNewMessage) {
+            // commitTrackerDataFromPriorMessage can find a valid state next turn instead of nulling everything.
+            // Inheritance does not overwrite existing data, so it's safe to call even if the condition misses an edge case.
+            if (!extensionSettings.autoUpdate || !isAwaitingNewMessage) {
                 inheritSwipeDataFromPriorMessage(lastMessage, chat.length - 1);
             }
         }
