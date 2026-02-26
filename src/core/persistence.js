@@ -322,6 +322,8 @@ export function commitTrackerDataFromPriorMessage(currentMessageIndex) {
         return;
     }
 
+    // console.log('[RPG Companion] commitTrackerDataFromPriorMessage called with index', currentMessageIndex, '| chat.length =', chat.length);
+
     for (let i = currentMessageIndex - 1; i >= 0; i--) {
         const message = chat[i];
         if (message.is_user || message.is_system) continue;
@@ -329,6 +331,7 @@ export function commitTrackerDataFromPriorMessage(currentMessageIndex) {
         // Found the prior assistant message — commit its active swipe data
         const swipeId = message.swipe_id || 0;
         const swipeData = getSwipeData(message, swipeId);
+        // console.log('[RPG Companion] Committing from chat[' + i + '] swipe', swipeId, '| has swipe data:', !!swipeData);
         committedTrackerData.userStats = swipeData?.userStats || null;
         committedTrackerData.infoBox = swipeData?.infoBox || null;
         const rawCharacterThoughts = swipeData?.characterThoughts;
