@@ -164,14 +164,6 @@ export function onMessageSent() {
     // Note: FAB spinning is NOT shown for together mode since no extra API request is made
     // The RPG data comes embedded in the main response
     // FAB spinning is handled by apiClient.js for separate/external modes when updateRPGData() is called
-
-    // For separate mode with auto-update disabled, commit from the prior assistant message's
-    // swipe store rather than lastGeneratedData to avoid ghost context from sibling swipes.
-    // At this point chat[chat.length - 1] is the user message, so search from before it.
-    if (extensionSettings.generationMode === 'separate' && !extensionSettings.autoUpdate) {
-        commitTrackerDataFromPriorMessage(chat.length - 1);
-        // console.log('[RPG Companion] 💾 SEPARATE MODE: Committed from prior assistant message (auto-update disabled)');
-    }
 }
 
 /**
