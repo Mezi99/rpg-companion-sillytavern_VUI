@@ -27,6 +27,7 @@ import {
     DEFAULT_SPOTIFY_PROMPT,
     DEFAULT_NARRATOR_PROMPT,
     DEFAULT_CONTEXT_INSTRUCTIONS_PROMPT,
+    DEFAULT_LOCATION_DESCRIPTION_PROMPT,
     SPOTIFY_FORMAT_INSTRUCTION
 } from './promptBuilder.js';
 import { restoreCheckpointOnLoad } from '../features/chapterCheckpoint.js';
@@ -809,6 +810,16 @@ export async function onGenerationStarted(type, data, dryRun) {
             setExtensionPrompt('rpg-companion-zzz-cyoa', '', extension_prompt_types.IN_CHAT, 0, false);
         }
 
+        // Inject Immersive Backgrounds prompt separately at depth 0 if enabled
+        if (extensionSettings.enableImmersiveBackgrounds && !shouldSuppress) {
+            const locationDescPromptText = extensionSettings.customLocationDescriptionPrompt || DEFAULT_LOCATION_DESCRIPTION_PROMPT;
+            const locationDescPrompt = `\n- ${locationDescPromptText}\n`;
+
+            setExtensionPrompt('rpg-companion-immersive-backgrounds', locationDescPrompt, extension_prompt_types.IN_CHAT, 0, false);
+        } else {
+            setExtensionPrompt('rpg-companion-immersive-backgrounds', '', extension_prompt_types.IN_CHAT, 0, false);
+        }
+
     } else if (extensionSettings.generationMode === 'separate' || extensionSettings.generationMode === 'external') {
         // In SEPARATE and EXTERNAL modes, inject the contextual summary for main roleplay generation
         const contextSummary = generateContextualSummary();
@@ -912,6 +923,16 @@ ${contextInstructionsText}
             setExtensionPrompt('rpg-companion-zzz-cyoa', '', extension_prompt_types.IN_CHAT, 0, false);
         }
 
+        // Inject Immersive Backgrounds prompt separately at depth 0 if enabled
+        if (extensionSettings.enableImmersiveBackgrounds && !shouldSuppress) {
+            const locationDescPromptText = extensionSettings.customLocationDescriptionPrompt || DEFAULT_LOCATION_DESCRIPTION_PROMPT;
+            const locationDescPrompt = `\n- ${locationDescPromptText}\n`;
+
+            setExtensionPrompt('rpg-companion-immersive-backgrounds', locationDescPrompt, extension_prompt_types.IN_CHAT, 0, false);
+        } else {
+            setExtensionPrompt('rpg-companion-immersive-backgrounds', '', extension_prompt_types.IN_CHAT, 0, false);
+        }
+
         // Clear together mode injections
         setExtensionPrompt('rpg-companion-inject', '', extension_prompt_types.IN_CHAT, 0, false);
         setExtensionPrompt('rpg-companion-example', '', extension_prompt_types.IN_CHAT, 0, false);
@@ -926,6 +947,7 @@ ${contextInstructionsText}
         setExtensionPrompt('rpg-companion-omniscience', '', extension_prompt_types.IN_CHAT, 0, false);
         setExtensionPrompt('rpg-companion-zzz-cyoa', '', extension_prompt_types.IN_CHAT, 0, false);
         setExtensionPrompt('rpg-companion-spotify', '', extension_prompt_types.IN_CHAT, 0, false);
+        setExtensionPrompt('rpg-companion-immersive-backgrounds', '', extension_prompt_types.IN_CHAT, 0, false);
     }
 
     // Set suppression state for the historical context injection
