@@ -73,6 +73,7 @@ import { renderQuests } from './src/systems/rendering/quests.js';
 import { renderMusicPlayer } from './src/systems/rendering/musicPlayer.js';
 import { toggleSnowflakes, initSnowflakes } from './src/systems/ui/snowflakes.js';
 import { toggleDynamicWeather, initWeatherEffects, updateWeatherEffect } from './src/systems/ui/weatherEffects.js';
+import { toggleImmersiveBackgrounds, initImmersiveBackgrounds } from './src/systems/features/immersiveBackgrounds.js';
 
 // Interaction modules
 import { initInventoryEventListeners } from './src/systems/interaction/inventoryActions.js';
@@ -667,6 +668,13 @@ async function initUI() {
         renderThoughts();
     });
 
+    // Immersive backgrounds toggle
+    $('#rpg-toggle-immersive-backgrounds').on('change', function() {
+        extensionSettings.enableImmersiveBackgrounds = $(this).prop('checked');
+        saveSettings();
+        toggleImmersiveBackgrounds(extensionSettings.enableImmersiveBackgrounds);
+    });
+
     $('#rpg-toggle-dice-display').on('change', function() {
         extensionSettings.showDiceDisplay = $(this).prop('checked');
         saveSettings();
@@ -1118,6 +1126,9 @@ async function initUI() {
 
     // Initialize avatar options (panel toggle)
     $('#rpg-toggle-auto-avatars-panel').prop('checked', extensionSettings.autoGenerateAvatars || false);
+
+    // Initialize immersive backgrounds toggle
+    $('#rpg-toggle-immersive-backgrounds').prop('checked', extensionSettings.enableImmersiveBackgrounds || false);
 
     $('#rpg-toggle-dice-display').prop('checked', extensionSettings.showDiceDisplay);
 

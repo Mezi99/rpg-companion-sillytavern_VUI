@@ -51,6 +51,8 @@ export let extensionSettings = {
     showDynamicWeatherToggle: true, // Show Dynamic Weather Effects toggle in main panel
     showNarratorMode: true, // Show Narrator Mode toggle in main panel
     showAutoAvatars: true, // Show Auto-generate Avatars toggle in main panel
+    enableImmersiveBackgrounds: false, // Enable immersive backgrounds feature
+    showImmersiveBackgroundsToggle: true, // Show Immersive Backgrounds toggle in main panel
     skipInjectionsForGuided: 'none', // skip injections for instruct injections and quiet prompts (GuidedGenerations compatibility)
     enableRandomizedPlot: true, // Show randomized plot progression button above chat input
     enableNaturalPlot: true, // Show natural plot progression button above chat input

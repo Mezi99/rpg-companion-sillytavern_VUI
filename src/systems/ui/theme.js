@@ -186,6 +186,7 @@ export function updateFeatureTogglesVisibility() {
     const $dynamicWeatherToggle = $('#rpg-dynamic-weather-toggle-wrapper');
     const $narratorToggle = $('#rpg-narrator-toggle-wrapper');
     const $autoAvatarsToggle = $('#rpg-auto-avatars-toggle-wrapper');
+    const $immersiveBackgroundsToggle = $('#rpg-immersive-backgrounds-toggle-wrapper');
 
     // Show/hide individual toggles
     $htmlToggle.toggle(extensionSettings.showHtmlToggle);
@@ -198,6 +199,7 @@ export function updateFeatureTogglesVisibility() {
     $dynamicWeatherToggle.toggle(extensionSettings.showDynamicWeatherToggle);
     $narratorToggle.toggle(extensionSettings.showNarratorMode);
     $autoAvatarsToggle.toggle(extensionSettings.showAutoAvatars);
+    $immersiveBackgroundsToggle.toggle(extensionSettings.showImmersiveBackgroundsToggle);
 
     // Hide entire row if all toggles are hidden
     const anyVisible = extensionSettings.showHtmlToggle ||
@@ -208,7 +210,8 @@ export function updateFeatureTogglesVisibility() {
                       extensionSettings.showSpotifyToggle ||
                       extensionSettings.showDynamicWeatherToggle ||
                       extensionSettings.showNarratorMode ||
-                      extensionSettings.showAutoAvatars;
+                      extensionSettings.showAutoAvatars ||
+                      extensionSettings.showImmersiveBackgroundsToggle;
     $featuresRow.toggle(anyVisible);
 }
 
