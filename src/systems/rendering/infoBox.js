@@ -133,6 +133,7 @@ export function renderInfoBox() {
             data.timeStart = jsonData.time?.start || '';
             data.timeEnd = jsonData.time?.end || '';
             data.location = jsonData.location?.value || '';
+            data.locationDescription = jsonData.location?.description || '';
 
             // Parse date string to extract weekday, month, year
             if (jsonData.date?.value) {
@@ -482,7 +483,9 @@ export function renderInfoBox() {
     // Row 2: Location widget (full width) - show if enabled
     if (config?.widgets?.location?.enabled) {
         const locationDisplay = data.location || i18n.getTranslation('infoBox.locationFallback') || 'Unknown location';
+        const locationDescription = data.locationDescription || '';
         const locationLockIconHtml = getLockIconHtml('infoBox', 'location');
+        const locationTitle = locationDescription ? `${locationDescription}` : (i18n.getTranslation('infoBox.clickToEdit') || 'Click to edit');
 
         html += `
             <div class="rpg-dashboard rpg-dashboard-row-2">
@@ -491,7 +494,7 @@ export function renderInfoBox() {
                     <div class="rpg-map-bg">
                         <div class="rpg-map-marker">📍</div>
                     </div>
-                    <div class="rpg-location-text rpg-editable" contenteditable="true" data-field="location" title="${i18n.getTranslation('infoBox.clickToEdit') || 'Click to edit'}">${locationDisplay}</div>
+                    <div class="rpg-location-text" contenteditable="false" data-field="location" title="${locationTitle}">${locationDisplay}</div>
                 </div>
             </div>
         `;
