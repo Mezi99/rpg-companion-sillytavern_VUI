@@ -35,7 +35,7 @@ class Internationalization {
     }
 
     async loadTranslations(lang) {
-        const fetchUrl = `/scripts/extensions/third-party/rpg-companion-sillytavern/src/i18n/${lang}.json`;
+        const fetchUrl = `/scripts/extensions/third-party/rpg-companion-sillytavern_VUI/src/i18n/${lang}.json`;
         try {
             const response = await fetch(fetchUrl);
             if (!response.ok) {

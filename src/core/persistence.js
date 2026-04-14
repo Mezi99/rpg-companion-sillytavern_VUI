@@ -19,7 +19,7 @@ import { migrateInventory } from '../utils/migration.js';
 import { validateStoredInventory, cleanItemString } from '../utils/security.js';
 import { migrateToV3JSON } from '../utils/jsonMigration.js';
 
-const extensionName = 'third-party/rpg-companion-sillytavern';
+const extensionName = 'third-party/rpg-companion-sillytavern_VUI';
 
 /**
  * Validates extension settings structure
