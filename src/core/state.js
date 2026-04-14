@@ -244,7 +244,7 @@ export let extensionSettings = {
         weather: { emoji: '☀️', forecast: 'Clear skies' },
         temperature: { value: 20, unit: 'C' },
         time: { start: '00:00', end: '00:00' },
-        location: { value: 'Unknown Location' }
+        location: { value: 'Unknown Location', description: '' }
     }, null, 2),
     characterThoughts: JSON.stringify({
         characters: []

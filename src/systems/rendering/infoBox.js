@@ -714,6 +714,9 @@ export function updateInfoBoxField(field, value) {
             } else if (field === 'location') {
                 if (!jsonData.location) jsonData.location = {};
                 jsonData.location.value = value;
+            } else if (field === 'locationDescription') {
+                if (!jsonData.location) jsonData.location = {};
+                jsonData.location.description = value;
             } else if (field === 'weekday' || field === 'month' || field === 'year') {
                 // Update date components
                 if (!jsonData.date) jsonData.date = {};

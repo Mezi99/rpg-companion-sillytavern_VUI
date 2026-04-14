@@ -373,9 +373,9 @@ export function setupSettingsPopup() {
 
         // Clear chat metadata immediately (don't wait for debounced save)
         const context = getContext();
-        if (context.chat_metadata && context.chat_metadata.rpg_companion) {
-            delete context.chat_metadata.rpg_companion;
-            // console.log('[RPG Companion] Cleared chat_metadata.rpg_companion for current chat');
+        if (context.chat_metadata && context.chat_metadata.rpg_companion_VUI) {
+            delete context.chat_metadata.rpg_companion_VUI;
+            // console.log('[RPG Companion] Cleared chat_metadata.rpg_companion_VUI for current chat');
         }
 
         // Clear all message swipe data
@@ -383,8 +383,8 @@ export function setupSettingsPopup() {
         if (chat && chat.length > 0) {
             for (let i = 0; i < chat.length; i++) {
                 const message = chat[i];
-                if (message.extra && message.extra.rpg_companion_swipes) {
-                    delete message.extra.rpg_companion_swipes;
+                if (message.extra && message.extra.rpg_companion_VUI_swipes) {
+                    delete message.extra.rpg_companion_VUI_swipes;
                     // console.log('[RPG Companion] Cleared swipe data from message at index', i);
                 }
             }

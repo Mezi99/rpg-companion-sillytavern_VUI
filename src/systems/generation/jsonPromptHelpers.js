@@ -166,7 +166,7 @@ export function buildInfoBoxJSONInstruction() {
     }
 
     if (widgets.location?.enabled) {
-        instruction += (hasFields ? ',\n' : '') + '  "location": {"value": "Location"}';
+        instruction += (hasFields ? ',\n' : '') + '  "location": {"value": "Location", "description": "Location description for background image"}';
         hasFields = true;
     }
 

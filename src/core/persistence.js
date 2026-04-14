@@ -212,7 +212,7 @@ export function saveChatData() {
     // console.log('[RPG Companion] 💾 saveChatData RAW committedTrackerData:', committedTrackerData);
     // console.log('[RPG Companion] 💾 saveChatData RAW lastGeneratedData:', lastGeneratedData);
 
-    chat_metadata.rpg_companion = {
+    chat_metadata.rpg_companion_VUI = {
         userStats: extensionSettings.userStats,
         classicStats: extensionSettings.classicStats,
         quests: extensionSettings.quests,
@@ -405,7 +405,7 @@ export function inheritSwipeDataFromPriorMessage(message, messageIndex) {
  * Automatically migrates v1 inventory to v2 format if needed.
  */
 export function loadChatData() {
-    if (!chat_metadata || !chat_metadata.rpg_companion) {
+    if (!chat_metadata || !chat_metadata.rpg_companion_VUI) {
         // Reset to defaults if no data exists
         updateExtensionSettings({
             userStats: {
@@ -443,7 +443,7 @@ export function loadChatData() {
         return;
     }
 
-    const savedData = chat_metadata.rpg_companion;
+    const savedData = chat_metadata.rpg_companion_VUI;
 
     // Restore stats
     if (savedData.userStats) {

@@ -68,6 +68,11 @@ export const DEFAULT_NARRATOR_PROMPT = `Infer the identity and details of charac
 export const DEFAULT_CONTEXT_INSTRUCTIONS_PROMPT = `The context above is information about the current scene, and what follows is the last message in the chat history. Ensure these details naturally reflect and influence the narrative. Character behavior, dialogue, and story events should acknowledge these conditions when relevant, such as fatigue affecting performance, low hygiene influencing social interactions, environmental factors shaping the scene, or a character's emotional state coloring their responses.`;
 
 /**
+ * Default Location Description prompt text (customizable by users)
+ */
+export const DEFAULT_LOCATION_DESCRIPTION_PROMPT = `When describing a location, provide a vivid, detailed description suitable for generating a background image. Include visual details like lighting, atmosphere, key objects, and the overall mood of the place.`;
+
+/**
  * Gets character card information for current chat (handles both single and group chats)
  * @returns {string} Formatted character information
  */
