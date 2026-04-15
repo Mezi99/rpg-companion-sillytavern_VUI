@@ -135,6 +135,14 @@ export function renderInfoBox() {
             data.location = jsonData.location?.value || '';
             data.locationDescription = jsonData.location?.description || '';
 
+            // Check if location changed and trigger background generation
+            if (jsonData.location?.locationChanged === true || jsonData.location?.locationChanged === 'true') {
+                console.log('[Immersive Backgrounds] Location changed detected during render');
+                import('../features/immersiveBackgrounds.js').then(module => {
+                    module.generateBackgroundFromDescription(jsonData.location?.description || '');
+                });
+            }
+
             // Parse date string to extract weekday, month, year
             if (jsonData.date?.value) {
                 data.date = jsonData.date.value;
@@ -720,6 +728,15 @@ export function updateInfoBoxField(field, value) {
             } else if (field === 'locationDescription') {
                 if (!jsonData.location) jsonData.location = {};
                 jsonData.location.description = value;
+            } else if (field === 'locationChanged') {
+                if (!jsonData.location) jsonData.location = {};
+                jsonData.location.locationChanged = value;
+                if (value === true || value === 'true') {
+                    console.log('[Immersive Backgrounds] Location changed detected');
+                    import('../features/immersiveBackgrounds.js').then(module => {
+                        module.generateBackgroundFromDescription(jsonData.location?.description || '');
+                    });
+                }
             } else if (field === 'weekday' || field === 'month' || field === 'year') {
                 // Update date components
                 if (!jsonData.date) jsonData.date = {};

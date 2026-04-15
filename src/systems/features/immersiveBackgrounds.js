@@ -1,11 +1,51 @@
 /**
  * Immersive Backgrounds Module
- * Generates detailed location descriptions for background image prompts
+ * Generates background images when location changes
  */
 
 import { extensionSettings } from '../../core/state.js';
+import { toastr } from '../../../../../../../script.js';
 
 let isEnabled = false;
+let isGenerating = false;
+
+/**
+ * Generate background image from location description
+ * @param {string} description - The location description to use as prompt
+ */
+export async function generateBackgroundFromDescription(description) {
+    if (!extensionSettings.enableImmersiveBackgrounds) {
+        return;
+    }
+
+    if (isGenerating) {
+        console.log('[Immersive Backgrounds] Generation already in progress, skipping');
+        return;
+    }
+
+    if (!description || !description.trim()) {
+        console.log('[Immersive Backgrounds] No description provided');
+        return;
+    }
+
+    try {
+        isGenerating = true;
+        console.log('[Immersive Backgrounds] Generating background with prompt:', description);
+
+        // Import SlashCommandParser dynamically
+        const { SlashCommandParser } = await import('../../../../../../../slash-commands/SlashCommandParser.js');
+
+        // Call /imagine with our description in quiet mode
+        // This uses the SD extension's image generation with user's settings
+        const command = `/imagine ${description} quiet=true`;
+        await SlashCommandParser.execute(command, 'imagine');
+    } catch (error) {
+        console.error('[Immersive Backgrounds] Generation failed:', error);
+        toastr.error('Failed to generate background image. Make sure Image Generation is configured.');
+    } finally {
+        isGenerating = false;
+    }
+}
 
 /**
  * Toggle immersive backgrounds feature
@@ -13,11 +53,6 @@ let isEnabled = false;
  */
 export function toggleImmersiveBackgrounds(enabled) {
     isEnabled = enabled;
-    if (enabled) {
-        initImmersiveBackgrounds();
-    } else {
-        cleanupImmersiveBackgrounds();
-    }
 }
 
 /**
@@ -32,4 +67,5 @@ export function initImmersiveBackgrounds() {
  */
 export function cleanupImmersiveBackgrounds() {
     isEnabled = false;
+    isGenerating = false;
 }

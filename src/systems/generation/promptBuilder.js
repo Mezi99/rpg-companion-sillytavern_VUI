@@ -73,6 +73,11 @@ export const DEFAULT_CONTEXT_INSTRUCTIONS_PROMPT = `The context above is informa
 export const DEFAULT_LOCATION_DESCRIPTION_PROMPT = `When describing a location, provide a vivid, detailed description suitable for generating a background image. Include visual details like lighting, atmosphere, key objects, and the overall mood of the place.`;
 
 /**
+ * Default Location Changed prompt text (customizable by users)
+ */
+export const DEFAULT_LOCATION_CHANGED_PROMPT = `When the location changes from one location to another (e.g., character moves from Forest to Castle), set locationChanged to "true". Otherwise omit or set to "false".`;
+
+/**
  * Gets character card information for current chat (handles both single and group chats)
  * @returns {string} Formatted character information
  */
