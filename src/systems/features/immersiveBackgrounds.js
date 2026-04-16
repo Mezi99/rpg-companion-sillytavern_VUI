@@ -4,7 +4,7 @@
  */
 
 import { extensionSettings } from '../../core/state.js';
-import { executeSlashCommandsOnChatInput } from '../../../../../scripts/slash-commands.js';
+import { executeSlashCommandsOnChatInput } from '../../../../../../scripts/slash-commands.js';
 
 // toastr is available globally via the toastr library loaded by SillyTavern
 const toastr = globalThis.toastr || window.toastr;
