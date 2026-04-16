@@ -4,7 +4,9 @@
  */
 
 import { extensionSettings } from '../../core/state.js';
-import { toastr } from '../../../../../../../script.js';
+
+// toastr is available globally via the toastr library loaded by SillyTavern
+const toastr = globalThis.toastr || window.toastr;
 
 let isEnabled = false;
 let isGenerating = false;
@@ -41,7 +43,9 @@ export async function generateBackgroundFromDescription(description) {
         await SlashCommandParser.execute(command, 'imagine');
     } catch (error) {
         console.error('[Immersive Backgrounds] Generation failed:', error);
-        toastr.error('Failed to generate background image. Make sure Image Generation is configured.');
+        if (toastr) {
+            toastr.error('Failed to generate background image. Make sure Image Generation is configured.');
+        }
     } finally {
         isGenerating = false;
     }
