@@ -4,6 +4,7 @@
  */
 
 import { extensionSettings } from '../../core/state.js';
+import { executeSlashCommandsOnChatInput } from '../../../../../scripts/slash-commands.js';
 
 // toastr is available globally via the toastr library loaded by SillyTavern
 const toastr = globalThis.toastr || window.toastr;
@@ -34,16 +35,13 @@ export async function generateBackgroundFromDescription(description) {
         isGenerating = true;
         console.log('[Immersive Backgrounds] Generating background with prompt:', description);
 
-        // Import SlashCommandParser with correct relative path
-        // From: src/systems/features/immersiveBackgrounds.js
-        // To:   scripts/slash-commands/SlashCommandParser.js
-        // Path: ../../../.. = extensions, ../../../../.. = public/scripts
-        const { SlashCommandParser } = await import('../../../../../slash-commands/SlashCommandParser.js');
-
         // Call /imagine with our description in quiet mode
         // This uses the SD extension's image generation with user's settings
-        const command = `/imagine ${description} quiet=true`;
-        await SlashCommandParser.execute(command, 'imagine');
+        const result = await executeSlashCommandsOnChatInput(
+            `/imagine ${description}`,
+            { quiet: true }
+        );
+        console.log('[Immersive Backgrounds] Image generation result:', result);
     } catch (error) {
         console.error('[Immersive Backgrounds] Generation failed:', error);
         if (toastr) {
