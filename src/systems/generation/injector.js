@@ -810,6 +810,8 @@ export async function onGenerationStarted(type, data, dryRun) {
             setExtensionPrompt('rpg-companion-zzz-cyoa', '', extension_prompt_types.IN_CHAT, 0, false);
         }
 
+        /* // COMMENTED OUT: Immersive Backgrounds prompt injection - confuses AI narration
+         * Kept for future use when we implement proper prompt refinement
         // Inject Immersive Backgrounds prompt separately at depth 0 if enabled
         if (extensionSettings.enableImmersiveBackgrounds && !shouldSuppress) {
             const locationDescPromptText = extensionSettings.customLocationDescriptionPrompt || DEFAULT_LOCATION_DESCRIPTION_PROMPT;
@@ -819,6 +821,7 @@ export async function onGenerationStarted(type, data, dryRun) {
         } else {
             setExtensionPrompt('rpg-companion-immersive-backgrounds', '', extension_prompt_types.IN_CHAT, 0, false);
         }
+        */
 
     } else if (extensionSettings.generationMode === 'separate' || extensionSettings.generationMode === 'external') {
         // In SEPARATE and EXTERNAL modes, inject the contextual summary for main roleplay generation
@@ -923,6 +926,8 @@ ${contextInstructionsText}
             setExtensionPrompt('rpg-companion-zzz-cyoa', '', extension_prompt_types.IN_CHAT, 0, false);
         }
 
+        /* // COMMENTED OUT: Immersive Backgrounds prompt injection - confuses AI narration
+         * Kept for future use when we implement proper prompt refinement
         // Inject Immersive Backgrounds prompt separately at depth 0 if enabled
         if (extensionSettings.enableImmersiveBackgrounds && !shouldSuppress) {
             const locationDescPromptText = extensionSettings.customLocationDescriptionPrompt || DEFAULT_LOCATION_DESCRIPTION_PROMPT;
@@ -932,6 +937,7 @@ ${contextInstructionsText}
         } else {
             setExtensionPrompt('rpg-companion-immersive-backgrounds', '', extension_prompt_types.IN_CHAT, 0, false);
         }
+        */
 
         // Clear together mode injections
         setExtensionPrompt('rpg-companion-inject', '', extension_prompt_types.IN_CHAT, 0, false);
@@ -947,7 +953,7 @@ ${contextInstructionsText}
         setExtensionPrompt('rpg-companion-omniscience', '', extension_prompt_types.IN_CHAT, 0, false);
         setExtensionPrompt('rpg-companion-zzz-cyoa', '', extension_prompt_types.IN_CHAT, 0, false);
         setExtensionPrompt('rpg-companion-spotify', '', extension_prompt_types.IN_CHAT, 0, false);
-        setExtensionPrompt('rpg-companion-immersive-backgrounds', '', extension_prompt_types.IN_CHAT, 0, false);
+        /* // COMMENTED OUT: setExtensionPrompt('rpg-companion-immersive-backgrounds', '', extension_prompt_types.IN_CHAT, 0, false); // Now handled in immersiveBackgrounds.js */
     }
 
     // Set suppression state for the historical context injection
