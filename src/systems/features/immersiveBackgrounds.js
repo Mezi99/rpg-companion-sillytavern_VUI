@@ -34,8 +34,15 @@ export async function generateBackgroundFromDescription(description) {
         isGenerating = true;
         console.log('[Immersive Backgrounds] Generating background with prompt:', description);
 
-        // Import SlashCommandParser dynamically
-        const { SlashCommandParser } = await import('../../../../../../../slash-commands/SlashCommandParser.js');
+        // Access SlashCommandParser from global scope (set by SillyTavern's SD extension)
+        const SlashCommandParser = globalThis.SlashCommandParser;
+        if (!SlashCommandParser) {
+            console.error('[Immersive Backgrounds] SlashCommandParser not available. Is Image Generation extension installed?');
+            if (toastr) {
+                toastr.error('Image Generation extension not found');
+            }
+            return;
+        }
 
         // Call /imagine with our description in quiet mode
         // This uses the SD extension's image generation with user's settings
